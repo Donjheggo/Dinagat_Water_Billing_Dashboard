@@ -13,7 +13,7 @@ export async function GetBills(
     const query = supabase
       .from("bills")
       .select(`*, client_id(name)`)
-      .order("name", { ascending: true })
+      .order("created_at", { ascending: true })
       .range((page - 1) * items_per_page, page * items_per_page - 1);
 
     const { data, error } = searchQuery
@@ -47,7 +47,7 @@ export async function CreateBill(formData: FormData) {
         penalty_date: formData.get("penalty_date"),
         penalty: formData.get("penalty"),
         amount: formData.get("amount"),
-        isPaid: false,
+        is_paid: false,
       })
       .select();
 
@@ -91,7 +91,7 @@ export async function UpdateBill(formData: FormData) {
         penalty_date: formData.get("penalty_date"),
         penalty: formData.get("penalty"),
         amount: formData.get("amount"),
-        isPaid: false,
+        is_paid: formData.get("is_paid"),
       })
       .eq("id", formData.get("id"))
       .select();

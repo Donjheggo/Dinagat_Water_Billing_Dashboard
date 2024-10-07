@@ -17,7 +17,7 @@ export type Database = {
           created_at: string
           due_date: string
           id: string
-          isPaid: boolean
+          is_paid: boolean
           penalty: number
           penalty_date: string
         }
@@ -28,7 +28,7 @@ export type Database = {
           created_at?: string
           due_date: string
           id?: string
-          isPaid?: boolean
+          is_paid?: boolean
           penalty: number
           penalty_date: string
         }
@@ -39,7 +39,7 @@ export type Database = {
           created_at?: string
           due_date?: string
           id?: string
-          isPaid?: boolean
+          is_paid?: boolean
           penalty?: number
           penalty_date?: string
         }
