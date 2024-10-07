@@ -1,5 +1,15 @@
 import DashboardCard from "@/components/dashboard/dashboard-card";
-import { WashingMachine, LoaderPinwheel, Hand, Check } from "lucide-react";
+import {
+  WashingMachine,
+  LoaderPinwheel,
+  Hand,
+  Check,
+  LayoutDashboard,
+  UsersRound,
+  Droplets,
+  ScrollText,
+  HandCoins,
+} from "lucide-react";
 import { GetTotalClients } from "@/lib/actions/clients";
 import { GetAllUpaidBills, GetAllPaidBills } from "@/lib/actions/bills";
 import { GetTotalPayments } from "@/lib/actions/payments";
@@ -18,22 +28,22 @@ export default async function Dashboard() {
     {
       title: "Total Clients",
       number: clients,
-      icon: <WashingMachine size={18} className="text-primary" />,
+      icon: <Droplets size={25} className="text-primary" />,
     },
     {
       title: "Total Paid Bills",
       number: unpaids,
-      icon: <LoaderPinwheel size={18} className="text-primary" />,
+      icon: <ScrollText size={25} className="text-primary" />,
     },
     {
       title: "Total Unpaid Bills",
       number: paids,
-      icon: <Hand size={18} className="text-primary" />,
+      icon: <ScrollText size={25} className="text-primary" />,
     },
     {
       title: "Total Payments",
       number: payments,
-      icon: <Check size={18} className="text-primary" />,
+      icon: <HandCoins size={25} className="text-primary" />,
     },
   ];
 
