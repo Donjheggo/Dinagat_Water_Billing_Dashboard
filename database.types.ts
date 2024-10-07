@@ -87,7 +87,6 @@ export type Database = {
         Row: {
           amount: number
           billing_number: string
-          client_id: string
           created_at: string
           gcash_ref_no: number
           id: string
@@ -96,7 +95,6 @@ export type Database = {
         Insert: {
           amount: number
           billing_number: string
-          client_id?: string
           created_at?: string
           gcash_ref_no: number
           id?: string
@@ -105,7 +103,6 @@ export type Database = {
         Update: {
           amount?: number
           billing_number?: string
-          client_id?: string
           created_at?: string
           gcash_ref_no?: number
           id?: string
@@ -113,11 +110,11 @@ export type Database = {
         }
         Relationships: [
           {
-            foreignKeyName: "payments_client_id_fkey"
-            columns: ["client_id"]
+            foreignKeyName: "payments_billing_number_fkey"
+            columns: ["billing_number"]
             isOneToOne: false
-            referencedRelation: "clients"
-            referencedColumns: ["id"]
+            referencedRelation: "bills"
+            referencedColumns: ["billing_number"]
           },
           {
             foreignKeyName: "payments_user_id_fkey"

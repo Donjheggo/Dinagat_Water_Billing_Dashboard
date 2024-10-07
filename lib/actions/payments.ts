@@ -12,12 +12,12 @@ export async function GetPayments(
     const supabase = createClient();
     const query = supabase
       .from("payments")
-      .select(`*, client_id(name)`)
-      .order("name", { ascending: true })
+      .select(`*, user_id(email), billing_number(*,client_id(name))`)
+      .order("created_at", { ascending: true })
       .range((page - 1) * items_per_page, page * items_per_page - 1);
 
     const { data, error } = searchQuery
-      ? await query.ilike("client_id.name", `%${searchQuery}%`)
+      ? await query.ilike("user_id.email", `%${searchQuery}%`)
       : await query;
 
     if (error) {
@@ -26,7 +26,7 @@ export async function GetPayments(
     }
 
     // filtering for search query foreign key
-    const filteredData = data.filter((item) => item.client_id !== null);
+    const filteredData = data.filter((item) => item.user_id !== null);
 
     return filteredData || [];
   } catch (error) {

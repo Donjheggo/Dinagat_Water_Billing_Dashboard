@@ -19,6 +19,6 @@ export default function DashboardCard({ item }: { item: DashboardCardT }) {
 
 type DashboardCardT = {
   title: string;
-  number: number;
   icon: ReactNode;
+  number: number;
 };

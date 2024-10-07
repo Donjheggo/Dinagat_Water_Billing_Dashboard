@@ -2,7 +2,9 @@ import {
   LogOut,
   LayoutDashboard,
   UsersRound,
-  WashingMachine,
+  Droplets,
+  ScrollText,
+  HandCoins,
 } from "lucide-react";
 import { ThemeToggler } from "../themes/theme-toggler";
 import { signout } from "@/lib/actions/auth";
@@ -18,7 +20,7 @@ export default function Sidenav() {
           <Link href="/" className="flex items-center gap-2 font-semibold">
             <Image src={favicon} alt="logo" width={30} height={30} />
             <span className="ml-2 text-lg text-primary font-semibold">
-              Laundry Shop
+              Sanjose Water Billing
             </span>
           </Link>
         </div>
@@ -72,17 +74,17 @@ export const adminLinks = [
   {
     name: "Clients",
     href: "/clients",
-    icon: <UsersRound />,
+    icon: <Droplets />,
   },
   {
     name: "Bills",
     href: "/bills",
-    icon: <UsersRound />,
+    icon: <ScrollText />,
   },
   {
     name: "Payments",
     href: "/payments",
-    icon: <UsersRound />,
+    icon: <HandCoins />,
   },
   {
     name: "Users",

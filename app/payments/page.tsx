@@ -1,8 +1,7 @@
-import UsersTable from "@/components/users/users-table";
 import SearchBar from "@/components/search-bar";
-import CreateUserDialog from "@/components/users/create-dialog";
+import PaymentsTable from "@/components/payments/table";
 
-export default function Users({
+export default function Payments({
   searchParams,
 }: {
   searchParams?: { query?: string; page?: string };
@@ -11,15 +10,14 @@ export default function Users({
   const page = Number(searchParams?.page) || 1;
 
   return (
-    <div className="container max-w-screen-md mx-auto">
-      <h1 className="text-center text-2xl">Users</h1>
+    <div className="container max-w-screen-lg mx-auto">
+      <h1 className="text-center text-2xl">Payments</h1>
       <div className="mt-5">
         <div className="flex items-center justify-between">
           <SearchBar />
-          <CreateUserDialog />
         </div>
         <div className="mt-2">
-          <UsersTable searchQuery={searchQuery} page={page} />
+          <PaymentsTable searchQuery={searchQuery} page={page} />
         </div>
       </div>
     </div>

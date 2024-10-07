@@ -10,7 +10,6 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import {
@@ -21,16 +20,13 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { GetUsers, GetTotalUsers } from "@/lib/actions/users";
-import { TablePagination } from "./pagination";
-
-import { Badge } from "../ui/badge";
-import UpdateButton from "./update-button";
 import DeleteButton from "./delete-button";
+import { TablePagination } from "./pagination";
 import { MoreHorizontal } from "lucide-react";
 import { Button } from "../ui/button";
+import { GetPayments, GetTotalPayments } from "@/lib/actions/payments";
 
-export default async function UsersTable({
+export default async function PaymentsTable({
   searchQuery,
   page,
 }: {
@@ -39,35 +35,51 @@ export default async function UsersTable({
 }) {
   const items_per_page = 7;
 
-  const [totalUsers, users] = await Promise.all([
-    GetTotalUsers(),
-    GetUsers(searchQuery, page, items_per_page),
+  const [totalPayments, payments] = await Promise.all([
+    GetTotalPayments(),
+    GetPayments(searchQuery, page, items_per_page),
   ]);
 
-  const totalPages = Math.ceil(totalUsers / items_per_page);
+  const totalPages = Math.ceil(totalPayments / items_per_page);
   return (
     <Card className="w-full shadow-none bg-background">
       <CardHeader>
-        <CardTitle>Users</CardTitle>
-        <CardDescription>Manage users role.</CardDescription>
+        <CardTitle>Payments</CardTitle>
+        <CardDescription>Manage payments.</CardDescription>
       </CardHeader>
       <CardContent>
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead className="table-cell">Email</TableHead>
-              <TableHead className="table-cell">Role</TableHead>
+              <TableHead className="table-cell">User email</TableHead>
+              <TableHead className="table-cell">Client name</TableHead>
+              <TableHead className="table-cell">Amount</TableHead>
+              <TableHead className="table-cell">Gcash Ref no.</TableHead>
+              <TableHead className="table-cell">Created At</TableHead>
               <TableHead>
                 <span className="sr-only">Actions</span>
               </TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
-            {users?.map((item, index) => (
+            {payments?.map((item, index) => (
               <TableRow key={index}>
-                <TableCell className="font-normal">{item.email}</TableCell>
-                <TableCell className="font-normal">
-                  <Badge>{item.role} </Badge>
+                <TableCell>
+                  <p className="font-normal">{item.user_id.email}</p>
+                </TableCell>
+                <TableCell>
+                  <p className="font-normal">{item.billing_number.client_id.name}</p>
+                </TableCell>
+                <TableCell>
+                  <p className="font-normal">₱{item.amount}</p>
+                </TableCell>
+                <TableCell>
+                  <p className="font-normal">{item.gcash_ref_no}</p>
+                </TableCell>
+                <TableCell>
+                  <p className="font-normal">
+                    {new Date(item.created_at).toDateString()}
+                  </p>
                 </TableCell>
                 <TableCell>
                   <DropdownMenu>
@@ -78,10 +90,6 @@ export default async function UsersTable({
                       </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
-                      <DropdownMenuItem>
-                        <UpdateButton id={item.id} />
-                      </DropdownMenuItem>
-                      <DropdownMenuSeparator />
                       <DropdownMenuItem>
                         <DeleteButton id={item.id} />
                       </DropdownMenuItem>
@@ -95,9 +103,9 @@ export default async function UsersTable({
       </CardContent>
       <CardFooter>
         <div className="text-xs text-muted-foreground">
-          Showing <strong>{(page - 1) * items_per_page + 1}</strong>-
-          <strong>{Math.min(page * items_per_page, totalUsers)}</strong> of{" "}
-          <strong>{totalUsers}</strong> users
+          <strong>{(page - 1) * items_per_page + 1}</strong>-
+          <strong>{Math.min(page * items_per_page, totalPayments)}</strong> of{" "}
+          <strong>{totalPayments}</strong>
         </div>
         <div className="ml-auto">
           <TablePagination totalPages={totalPages} />

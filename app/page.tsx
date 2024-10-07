@@ -1,41 +1,38 @@
 import DashboardCard from "@/components/dashboard/dashboard-card";
 import { WashingMachine, LoaderPinwheel, Hand, Check } from "lucide-react";
-// import OrdersTable from "@/components/dashboard/orders-table";
-import CustomersTable from "@/components/dashboard/customers-table";
-// import {
-//   GetTotalOrders,
-//   TotalClaimedOrders,
-//   TotalOnProcessOrders,
-//   TotalPickUpOrders,
-// } from "@/lib/actions/orders";
+import { GetTotalClients } from "@/lib/actions/clients";
+import { GetAllUpaidBills, GetAllPaidBills } from "@/lib/actions/bills";
+import { GetTotalPayments } from "@/lib/actions/payments";
+import BillsTable from "@/components/dashboard/bills-table";
+import PaymentsTable from "@/components/dashboard/payments-table";
 
 export default async function Dashboard() {
-  // const [total, claimed, process, pickup] = await Promise.all([
-  //   GetTotalOrders(),
-  //   TotalClaimedOrders(),
-  //   TotalOnProcessOrders(),
-  //   TotalPickUpOrders(),
-  // ]);
+  const [clients, unpaids, paids, payments] = await Promise.all([
+    GetTotalClients(),
+    GetAllUpaidBills(),
+    GetAllPaidBills(),
+    GetTotalPayments(),
+  ]);
 
   const cards = [
     {
-      title: "Total Orders",
-      number: 22,
+      title: "Total Clients",
+      number: clients,
       icon: <WashingMachine size={18} className="text-primary" />,
     },
     {
-      title: "On Process Orders",
-      number: 33,
+      title: "Total Paid Bills",
+      number: unpaids,
       icon: <LoaderPinwheel size={18} className="text-primary" />,
     },
     {
-      title: "Ready For Pickup",
-      number: 44,
+      title: "Total Unpaid Bills",
+      number: paids,
       icon: <Hand size={18} className="text-primary" />,
     },
     {
-      title: "Claimed Orders",
-      number: 55,
+      title: "Total Payments",
+      number: payments,
       icon: <Check size={18} className="text-primary" />,
     },
   ];
@@ -50,10 +47,10 @@ export default async function Dashboard() {
       </div>
       <div className="flex flex-1 flex-col lg:flex-row gap-4 mt-4">
         <div className="w-full">
-          {/* <OrdersTable searchQuery="" page={1} /> */}
+          <BillsTable searchQuery="" page={1} />
         </div>
         <div className="w-full lg:w-[50%]">
-          {/* <CustomersTable searchQuery="" page={1} /> */}
+          <PaymentsTable searchQuery="" page={1} />
         </div>
       </div>
     </div>

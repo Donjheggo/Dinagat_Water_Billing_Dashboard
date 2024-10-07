@@ -152,3 +152,41 @@ export async function GetAllBills() {
     return [];
   }
 }
+
+export async function GetAllPaidBills() {
+  try {
+    const supabase = createClient();
+    const { data, error } = await supabase
+      .from("bills")
+      .select("*")
+      .eq("is_paid", true);
+
+    if (error) {
+      console.error(error.message);
+      return 0;
+    }
+    return data.length || 0;
+  } catch (error) {
+    console.error(error);
+    return 0;
+  }
+}
+
+export async function GetAllUpaidBills() {
+  try {
+    const supabase = createClient();
+    const { data, error } = await supabase
+      .from("bills")
+      .select("*")
+      .eq("is_paid", false);
+
+    if (error) {
+      console.error(error.message);
+      return 0;
+    }
+    return data.length || 0;
+  } catch (error) {
+    console.error(error);
+    return 0;
+  }
+}

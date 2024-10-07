@@ -17,7 +17,7 @@ import { Plus } from "lucide-react";
 import { signup } from "@/lib/actions/auth";
 import { toast } from "react-toastify";
 
-export default function CreateDialog() {
+export default function CreateUserDialog() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -33,7 +33,7 @@ export default function CreateDialog() {
         toast.error(`Error: ${error}`);
       }
     } catch (error) {
-      toast.error("There was an unexpected error creating the event.");
+      toast.error("There was an unexpected error creating.");
     }
   };
 

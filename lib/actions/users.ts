@@ -3,7 +3,6 @@
 import { revalidatePath } from "next/cache";
 import { createClient } from "../supabase/server";
 
-
 export async function GetUsers(
   searchQuery: string,
   page: number,
@@ -33,7 +32,7 @@ export async function GetUsers(
   }
 }
 
-export async function TotalUsers() {
+export async function GetTotalUsers() {
   try {
     const supabase = createClient();
     const { data, error } = await supabase
@@ -95,7 +94,7 @@ export async function UpdateUser(formData: FormData) {
     const { error } = await supabase
       .from("users")
       .update({
-        role: formData.get("role")
+        role: formData.get("role"),
       })
       .eq("id", formData.get("id"))
       .select();
