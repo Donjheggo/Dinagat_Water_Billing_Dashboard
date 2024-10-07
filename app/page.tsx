@@ -1,15 +1,5 @@
 import DashboardCard from "@/components/dashboard/dashboard-card";
-import {
-  WashingMachine,
-  LoaderPinwheel,
-  Hand,
-  Check,
-  LayoutDashboard,
-  UsersRound,
-  Droplets,
-  ScrollText,
-  HandCoins,
-} from "lucide-react";
+import { Droplets, ScrollText, HandCoins } from "lucide-react";
 import { GetTotalClients } from "@/lib/actions/clients";
 import { GetAllUpaidBills, GetAllPaidBills } from "@/lib/actions/bills";
 import { GetTotalPayments } from "@/lib/actions/payments";
